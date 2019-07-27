@@ -3,7 +3,7 @@
 //by - Teja Juluru
 //created on 23/07/19
 
-//BST 
+//BST
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -36,21 +36,19 @@ node* insert(node* root,int element) {
 		root->right = insert(root->right,element);
 	}
 	else {
-		printf("duplicate\n");
+		printf("duplicates not allowed.\n");
 		exit(0);
 	}
 }
 //
 
 //search for element in BST
-void search(node* root,int search_ele) {
+int search(node* root,int search_ele) {
 	if(root == NULL) {
-		printf("element not found\n");
-		return;
+		return 0;
 	}
 	if(root->element == search_ele) {
-		printf("element found\n");
-		return;
+		return 1;
 	}
 	else if(search_ele < root->element) {
 		search(root->left,search_ele);
@@ -103,6 +101,19 @@ int main(int argc, char const *argv[])
 			break;
 		root = insert(root,temp);
 	}
+
+	//Search for a key in the BST. If not found, insert into it
+	printf("Enter a key to search for it. If not found, will be inserted into the BST\n");
+	int key = 0;
+	scanf("%d",&key);
+	if(search(root,key))
+		printf("element found\n");
+	else {
+		printf("Not in the BST, inserting\n");
+		insert(root,key);
+	}
+	//
+
 	printf("inorder traversal : \n");
 	inorder(root);
 	printf("\n");

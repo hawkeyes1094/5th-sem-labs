@@ -89,21 +89,36 @@ int main(int argc, char const *argv[])
 
 	//create the nodes using adjaceny matrix
 	node** graph = (node**)malloc(no_of_nodes*sizeof(node*));
-	int temp = 0; //tmep var to store to number of entries
+
 	for(int i = 0;i < no_of_nodes;i++) {
-		temp = 0;
+		int temp = 0; //tmep var to store to number of entries
 		for(int j = 0;j < no_of_nodes;j++)
 			temp += matrix[i][j];
 
 		//create a node
-		node[i] = malloc(sizeof(node) + temp*sizeof(int));
-		node[i]->no_of_edges = 0;
+		graph[i] = (node *)malloc(sizeof(node) + temp*sizeof(int));
+		graph[i]->no_of_edges = 0;
+
 		//enter edge info into node
 		for(int j = 0;j < no_of_nodes;j++) {
-			if(matrix[i][j] == 1)
-				node->edges
+			if(matrix[i][j] == 1) {
+				//Store the node number in the edges array
+				graph[i]->edges[graph[i]->no_of_edges] = j+1;
+				graph[i]->no_of_edges += 1;
+			}
 		}
 	}
+	//
+
+	//print the adjacency list
+	for(int i = 0;i < no_of_nodes;i++) {
+		printf("%d",i+1);
+		for(int j = 0;j < graph[i]->no_of_edges;j++) {
+			printf("->%d",graph[i]->edges[j]);
+		}
+		printf("\n");
+	}
+	//
 
 	return 0;
 }
