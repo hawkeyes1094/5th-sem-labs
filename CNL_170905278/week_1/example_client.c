@@ -24,7 +24,8 @@ int main(int argc, char const *argv[])
 
 	//Name the socket as agreed with the server
 	address.sin_family = AF_INET;
-	address.sin_addr.s_addr = inet_addr("172.16.58.186"); //MY PC IP addr
+	//Forgot to change it here too. So dumb
+	address.sin_addr.s_addr = inet_addr("127.0.0.1"); //MY PC IP addr
 	address.sin_port = htons(10200);
 	len = sizeof(address);
 
@@ -37,10 +38,11 @@ int main(int argc, char const *argv[])
 
 	//You can now read and write via sockfd
 	printf("Enter String \t");
-	gets(ch);
+	scanf("%[^\n]s",);
+	printf("length of the message is : %d\n",strlen(buf));
 	ch[strlen(ch)] = '\0';
 	write(sockfd,ch,strlen(ch));
-	printf("STRING SENT BACK FROM THE SERVER IS ....."); 
+	printf("STRING SENT BACK FROM THE SERVER IS .....");
 	while(n) {
 		n = read(sockfd,buf,sizeof(buf));
 		puts(buf);

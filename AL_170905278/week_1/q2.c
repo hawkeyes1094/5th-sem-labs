@@ -24,11 +24,11 @@ int main(int argc, char const *argv[])
 	int choice = 0;
 	printf("For undirected graph, enter 1\n");
 	printf("For directed graph, enter 2\n");
-	// do{
+	do{
 		printf("Enter choice : ");
 		scanf("%d",&choice);
-	// }while(choice != 1 || choice != 2); //keep looping until correct choice
 
+	}while(choice != 1 && choice != 2); //keep looping until correct choice
 	int no_of_nodes = 0;
 	printf("Enter the number of nodes : ");
 	scanf("%d",&no_of_nodes);
@@ -43,20 +43,17 @@ int main(int argc, char const *argv[])
 	for (int i = 0; i < no_of_nodes; i++) {
 		matrix[i] = (int*)malloc(no_of_nodes*sizeof(int));
 	}
-	//
 
 	//create a 2*no_of_edges matrix for edges info
 	int** edges_matrix = (int**)malloc(2*sizeof(int*));
 	edges_matrix[0] = (int*)malloc(no_of_edges*sizeof(int));
 	edges_matrix[1] = (int*)malloc(no_of_edges*sizeof(int));
-	//
 
 	//input edges info
 	printf("Enter edges info : \n");
 	for (int i = 0; i < no_of_edges; ++i) {
 		scanf("%d %d",&edges_matrix[0][i],&edges_matrix[1][i]);
 	}
-	//
 
 	//enter edges info into adjacency matrix
 	for(int i = 0;i < no_of_edges;i++) {
@@ -75,7 +72,6 @@ int main(int argc, char const *argv[])
 
 		}
 	}
-	//
 
 	//print the adjacency matrix
 	printf("adjacency matrix : \n");
@@ -85,7 +81,6 @@ int main(int argc, char const *argv[])
 		}
 		printf("\n");
 	}
-	//
 
 	//create the nodes using adjaceny matrix
 	node** graph = (node**)malloc(no_of_nodes*sizeof(node*));
@@ -108,7 +103,7 @@ int main(int argc, char const *argv[])
 			}
 		}
 	}
-	//
+
 
 	//print the adjacency list
 	for(int i = 0;i < no_of_nodes;i++) {
@@ -118,7 +113,6 @@ int main(int argc, char const *argv[])
 		}
 		printf("\n");
 	}
-	//
 
 	return 0;
 }

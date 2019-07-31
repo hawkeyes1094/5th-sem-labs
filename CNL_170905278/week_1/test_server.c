@@ -33,7 +33,7 @@ int main(int argc, char const *argv[]) {
     //accept a connection
     newsockfd = accept(sockfd,(struct sockaddr*)&client_addr,&client_len);
 
-    char* buffer = (char*)malloc(256*sizeof(char));
+    char* buffer = (char*)malloc(BUFFER_LEN*sizeof(char));
 
     //read from client and print
     int bytes_transmitted = recv(newsockfd,buffer,BUFFER_LEN*sizeof(char),0);

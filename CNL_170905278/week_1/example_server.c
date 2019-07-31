@@ -23,7 +23,8 @@ int main(int argc, char const *argv[])
 
 	//name the socket
 	seraddr.sin_family = AF_INET;
-	seraddr.sin_addr.s_addr = inet_addr("172.16.58.186"); //MY PC IP addr
+	//Change the IP address dumbass
+	seraddr.sin_addr.s_addr = inet_addr("127.0.0.1"); //MY PC IP addr
 	seraddr.sin_port = htons(PORTNO);
 	bind(sockfd,(struct sockaddr *)&seraddr,sizeof(seraddr));
 
