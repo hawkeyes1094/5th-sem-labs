@@ -1,8 +1,10 @@
 #!/bin/bash
 
-echo "enter directory path"
-read $1
-echo "enter regular expression"
-read $2
+echo "directory path : $1"
+#read path
+#echo $1
+echo "regular expression : $2"
+#read regex
+#echo $2
 ls $1 | grep -e "$2"
 
