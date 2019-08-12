@@ -42,8 +42,8 @@ void PerfromClientTask(int sockfd) {
   printf("%s\n",buffer);
 
   //Print the PID of the server
-  printf("PID of server recieved\n");
   bytes_transmitted = recv(sockfd,buffer,BUFFER_LEN*sizeof(char),0);
+  printf("PID of server recieved\n");
   printf("%s\n",buffer);
 
   free(buffer);
