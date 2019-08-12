@@ -12,6 +12,7 @@
 #include<sys/types.h>
 #include<sys/socket.h>
 #include<netinet/in.h>
+#include<arpa/inet.h>
 #define PORTNO 15000
 #define BUFFER_LEN 256
 
@@ -21,7 +22,7 @@ void TerminateSocket(int sockfd) {
 }
 
 int CreateClientSocket(char* ip_address) {
-  printf("entered CreateClientSocket\n");
+
   struct sockaddr_in  address;
   address.sin_family = AF_INET;
   address.sin_addr.s_addr = inet_addr(ip_address);
@@ -41,15 +42,21 @@ int CreateClientSocket(char* ip_address) {
 }
 
 void PerfromClientTask(int sockfd) {
-  printf("Entered PerfromClientTask\n");
+  char newline;
+
   char* buffer = (char *)malloc(BUFFER_LEN*sizeof(char));
 
+  //If we want to use the same connection, uncomment the while loop
+  //while(1) {
   printf("Enter message : ");
   scanf("%[^\n]s",buffer);
-
+  scanf("%c",&newline);
+  printf("message entered : %s\n",buffer);
   //Exit condition
-  // if(!strcmp("QUIT",buffer))
-  //   TerminateSocket(sockfd);
+  if(!strcmp("QUIT",buffer)) {
+  	int bytes_transmitted = send(sockfd,buffer,BUFFER_LEN*sizeof(char),0);
+	TerminateSocket(sockfd);
+  }
 
   //Send the message to the server
   int bytes_transmitted = send(sockfd,buffer,BUFFER_LEN*sizeof(char),0);
@@ -58,7 +65,7 @@ void PerfromClientTask(int sockfd) {
   printf("Message returned back in uppercase : \n");
   bytes_transmitted = recv(sockfd,buffer,BUFFER_LEN*sizeof(char),0);
   printf("%s\n",buffer);
-
+  //}
   free(buffer);
 }
 
