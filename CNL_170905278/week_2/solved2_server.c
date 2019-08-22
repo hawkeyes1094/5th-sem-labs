@@ -1,4 +1,4 @@
-//CN Lab week 2, Solved exercise 1
+//CN Lab week 2, Solved example 2
 
 //by - Teja Juluru
 //Created on 1/8/19
@@ -32,12 +32,14 @@ int main(int argc, char const *argv[])
 	server_len = sizeof(server_addr);
 	
 	bind(server_sockfd,(struct sockaddr*)&server_addr,server_len);
-	listen(server_sockfd,5);
+	
 
 	FD_ZERO(&readfs);
 	FD_SET(server_sockfd,&readfs);
 
 	while(1) {
+
+		listen(server_sockfd,5);
 		char ch;
 		int fd,nread;
 		testfs = readfs;

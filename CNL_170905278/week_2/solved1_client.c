@@ -1,4 +1,4 @@
-//CN Lab week 2, Solved exercise 1
+//CN Lab week 2, Solved example 1
 
 //by - Teja Juluru
 //Created on 1/8/19
