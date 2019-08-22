@@ -1,55 +1,29 @@
 //Algo Lab week 4, Q2
 
 //By - Teja Juluru
+//Created on - 16/8/19
 
 //Program for depth first search of a graph
 //Also print the push and pop order of the vertices
 #include<stdio.h>
 #include<stdlib.h>
 
-typedef struct{
-	int ele[256];
-	int top;
-}stack;
-
-void stack_init(stack* stk) {
-	stk->top = -1;
-}
-
-void push(stack* stk,int n) {
-	stk->top += 1;
-	stk->ele[stk->top] = n;
-}
-
-int pop(stack* stk) {
-	if(stk->top != -1) {
-		int temp = stk->ele[stk->top];
-		stk->top -= 1;
-		return temp;
-	}
-}
-
 //DFS traversal
-void dfsv(int** graph,int n,int* visited,int i,stack* stk) {
-	printf("visiting node %d\n",i+1);
-	// push(stk,i+1);
-	visited[i] = 1;
-	for(int j = 0;j < n;j++) {
-		if(!visited[j] && graph[i][j])
-			dfsv(graph,n,visited,j);
+void dfs(int** adjacency_matrix, int no_of_vertices,int* visited,int current) {
+	if(visited[current] != 1) {
+		//mark the node as visited
+		visited[current] = 1;
+		printf("pushed node %d\n",current+1);
+		for(int j = 0;j < no_of_vertices;j++) {
+			if(adjacency_matrix[current][j]  == 1 && visited[j] == 0) {
+				dfs(adjacency_matrix,no_of_vertices,visited,j);
+				printf("popped node %d\n",j+1);
+			}
+		}
 	}
 }
 
-void dfs(int** graph,int no_of_vertices,int* visited) {
-	for(int i = 0;i < no_of_vertices;i++) {
-		if(!visited[i])
-			dfsv(graph,no_of_vertices,visited,i);
-	}
-}
-//
-
-int main(int argc, char const *argv[])
-{
+int main(int argc, char const *argv[]) {
 	int no_of_vertices;
 	printf("Enter the number of vertices : ");
 	scanf("%d",&no_of_vertices);
@@ -71,10 +45,10 @@ int main(int argc, char const *argv[])
 		adjacency_matrix[edge1-1][edge2-1] = adjacency_matrix[edge2-1][edge1-1] = 1;
 	}
 
+	//create the visited array to mark a node once it is visited
 	int* visited = (int*)malloc(no_of_vertices*sizeof(int));
 
-	dfs(adjacency_matrix,no_of_vertices,visited);
-
+	dfs(adjacency_matrix,no_of_vertices,visited,0);
 	
 	return 0;
 }

@@ -1,6 +1,7 @@
 //Algo Lab week 4, Q1
 
 //By - Teja Juluru
+//Created on - 16/8/19
 
 //Program for assignment problem using brute-force
 //Suppose there are n jobs and n workers, find the
@@ -39,17 +40,16 @@ void permute(int* arr,int l,int r,int** permutations,unsigned long* permute_coun
 	}
 }
 
-/*
+
 void print_matrix(int** matrix,int m,int n) {
 	for(int i = 0;i < m;i++) {
 		for(int j = 0;j < n;j++)
 			printf("%d ",matrix[i][j]);
 		printf("\n");
 	}
-}*/
+}
 
-int main(int argc, char const *argv[])
-{
+int main(int argc, char const *argv[]) {
 	int n;
 	printf("Enter no of jobs : ");
 	scanf("%d",&n);
@@ -67,12 +67,13 @@ int main(int argc, char const *argv[])
 	}
 
 	//create all possible permutations
+	
 	//declare the permutations matrix
 	unsigned long no_of_permutations = factorial(n);
 	int** permutations = (int**)malloc(no_of_permutations*sizeof(int*));
 	for(unsigned long i = 0;i < no_of_permutations;i++)
 		permutations[i] = (int*)malloc(n*sizeof(int));
-	//
+	
 	//send the index matrix to generate the permutations
 	int* arr = (int*)malloc(n*sizeof(int));
 	for(int i = 0;i < n;i++)
