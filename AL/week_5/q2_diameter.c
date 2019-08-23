@@ -7,10 +7,10 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-typdef sruct node{
+typedef struct node{
 	int ele;
 	struct node* left;
-	sruct node* right;
+	struct node* right;
 }NODE;
 
 NODE* NewNode(int x) {
@@ -41,12 +41,40 @@ NODE* CreateBinaryTree() {
 	return root;
 }
 
+int max(int a,int b) {
+	return(a >= b ? a : b);
+}
+
 int height(NODE* root) {
-	
+	if(root == NULL)
+		return 0;
+	return(1 + max(height(root->left),height(root->right)));
+}
+
+int diameter(NODE* root) {
+	if(root == NULL)
+		return 0;
+
+	//get the height of left and right subtree
+	int left_height = height(root->left);
+	int right_height = height(root->right);
+
+	//get the diameter of left and right subtree
+	int left_diameter = diameter(root->left);
+	int right_diameter = diameter(root->right);
+
+	//return the max of
+	//1. left_height + right_height + 1
+	//2. left_diameter
+	//3. right_diameter
+	return( max( left_height+right_height+1, max(left_diameter,right_diameter) ) );
 }
 
 int main(int argc, char const *argv[])
 {
 	NODE* root = CreateBinaryTree();
+
+	int tree_diameter = diameter(root);
+	printf("diameter = %d\n",tree_diameter);
 	return 0;
 }
