@@ -6,21 +6,26 @@
 //Multithreaded program to generate
 // primes between two limits
 
-//Not working
+//compile using the flags -lm and -pthread
 
 #include<stdio.h>
 #include<stdlib.h>
 #include<pthread.h>
 #include<math.h>
+#define MAX_SIZE 256
+typedef struct{
+	int m;
+	int n;
+	int prime_count;
+	int primes[MAX_SIZE];
+}structure;
 
 void* generate_primes(void* param) {
-	int m = ((int*)param)[0];
-	int n = ((int*)param)[1];
-	int* primes = (int*)malloc(100*sizeof(int));
-	int prime_count = 0;
+	
+	structure* parameter = (structure*)param;
 
 	//generate primes
-	for(int i = m;i <= n;i++) {
+	for(int i = parameter->m;i <= parameter->n;i++) {
 		int root = sqrt(i);
 		int j;
 		for(j = 2;j <= root;j++) {
@@ -28,31 +33,28 @@ void* generate_primes(void* param) {
 				break;
 		}
 		if(j == root+1) {
-			primes[prime_count+1] = 1;
-			prime_count++;
+			parameter->primes[parameter->prime_count] = i;
+			parameter->prime_count += 1;
 		}
 	}
-	primes[0] = prime_count;
-	return (void*)primes;
+	return NULL;
 }
 
 int main(int argc, char const *argv[])
 {
-	int m,n;
+	structure p;
 	printf("Enter lower limit : ");
-	scanf("%d",&m);
+	scanf("%d",&(p.m));
 	printf("Enter upper limit : ");
-	scanf("%d",&n);
-	int arr[2] = {m,n};
-	int* primes;
+	scanf("%d",&(p.n));
+	p.prime_count = 0;
 
 	pthread_t thread;
-	pthread_create(&thread,0,&generate_primes,(void*)arr);
-	pthread_join(thread,(void**)primes);
+	pthread_create(&thread,0,&generate_primes,(void*)&p);
+	pthread_join(thread,NULL);
 
-	int prime_count = primes[0];
-	for(int i = 1;i <= prime_count;i++) {
-		printf("%d ",primes[i]);
+	for(int i = 0;i < p.prime_count;i++) {
+		printf("%d ",p.primes[i]);
 	}
 	printf("\n");
 
