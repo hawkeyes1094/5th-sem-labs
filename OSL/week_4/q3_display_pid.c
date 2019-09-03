@@ -26,7 +26,10 @@ int main(int argc, char const *argv[])
 		printf("Child PID = %ld\n",getpid());
 	}
 	else {
-		
+		wait(NULL);
+		printf("In the parent process\n");
+		printf("Parent PID = %ld\n",getpid());
+		printf("Child PID = %ld\n",pid);
 	}
 	return 0;
 }
