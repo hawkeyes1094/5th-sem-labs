@@ -14,7 +14,8 @@ void* summation(void* param) {
 	int sum = 0;
 	int n = arr[0];
 	for(int  i = 1;i <= n;i++) {
-		sum += arr[i];
+		if(arr[i] > 0)
+			sum += arr[i];
 	}
 	return (void*)sum;
 }
@@ -38,6 +39,6 @@ int main(int argc, char const *argv[])
 	pthread_create(&thread,0,&summation,(void*)arr);
 	pthread_join(thread,(void**)&answer);
 
-	printf("Summation = %d\n",answer);
+	printf("Summation of non-negative numbers = %d\n",answer);
 	return 0;
 }
