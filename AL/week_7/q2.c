@@ -37,43 +37,88 @@ int height(NODE* root) {
 void BalanceFactor(NODE* root) {
 	if(root != NULL) {
 		root->balance_factor = height(root->left) - height(root->right);
-		BalanceFactor(root->left);
-		BalanceFactor(root->right);
+		// BalanceFactor(root->left);
+		// BalanceFactor(root->right);
 	}
 }
 
-void BalanceLeftSubtree(NODE* root,int left_balance_factor) {
-	
+NODE* RightRotate(NODE* root) {
+	printf("Right rotate on node %d\n",root->ele);
+	NODE* x = root->left;
+	NODE* T2 = x->right;
+
+	x->right = root;
+	root->left = T2;
+
+	return x;
+}
+
+NODE* LeftRotate(NODE* root) {
+	printf("Left rotate on node %d\n",root->ele);
+	NODE* y = root->right;
+	NODE* T2 = y->left;
+
+	y->left = root;
+	root->right = T2;
+
+	return y;
 }
 
 NODE* InsertBinarySearchTree(NODE* root,int x) {
 	if(root == NULL) {
 		// printf("root == NULL,x = %d\n",x);
 		root = CreateNode(x);
+		return root;
 	}
-	else if(x < root->ele) {
+	
+	if(x < root->ele) {
 		// printf("x < root->ele,x = %d,ele = %d,left\n",x,root->ele);
 		root->left = InsertBinarySearchTree(root->left,x);
-		BalanceFactor(root);
-		printf("Left, balance factor of %d is %d\n",root->ele,root->balance_factor);
-		int left_balance_factor = BalanceFactor(root->left)
-		if(left_balance_factor > 1 || left_balance_factor < -1) {
-			BalanceLeftSubtree(root,left_balance_factor);
-		}
 	}
 	else if(x > root->ele) {
 		// printf("x > root->ele,x = %d,ele = %d,right\n",x,root->ele);
 		root->right = InsertBinarySearchTree(root->right,x);
-		BalanceFactor(root);
-		printf("Right, balance factor of %d is %d\n",root->ele,root->balance_factor);
-
 	}
 	else {
 		// printf("duplicate,x = %d,root->ele = %d\n",x,root->ele);
 		printf("ERROR. Duplicates not allowed\n");
 		exit(0);
 	}
+
+	BalanceFactor(root);
+
+	//Left left case
+	if(root->balance_factor > 1 && x < root->left->ele) {
+		return RightRotate(root);
+	}
+
+	//Right right case
+	if(root->balance_factor < -1 && x > root->right->ele) {
+		return LeftRotate(root);
+	}
+
+	//Left right case
+	if(root->balance_factor > 1 && x > root->left->ele) {
+		root->left = LeftRotate(root->left);
+		return RightRotate(root);
+	}
+
+	//Right left case
+	if(root->balance_factor < -1 && x < root->right->ele) {
+		root->right = RightRotate(root->right);
+		return LeftRotate(root);
+	}
+
 	return root;
+}
+
+//Update the balance factor of all the nodes
+void final_balance(NODE* root) {
+	if(root != NULL) {
+		final_balance(root->left);
+		BalanceFactor(root);
+		final_balance(root->right);
+	}
 }
 
 void inorder(NODE* root) {
@@ -98,6 +143,7 @@ int main(int argc, char const *argv[])
 	// BalanceFactor(root);
 	// printf("%d\n",root->ele);
 	printf("The BST along with balance factor in inorder : \n");
+	final_balance(root);
 	inorder(root);
 	printf("\n");
 	return 0;
