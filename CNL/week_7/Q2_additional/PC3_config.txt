@@ -1,0 +1,5 @@
+#Lab 07 Q2(additional), PC3 (YELLOW) config
+#Copy paste these commands into the console of PC3
+
+ip 10.10.10.1/24 10.10.10.254
+ip dns 1.1.1.1

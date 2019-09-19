@@ -1,0 +1,15 @@
+#Lab 07 Q1, R3 (DNS client) config
+#Copy paste these commands into the console of R3
+
+conf t
+inter f0/0
+ip address 10.0.10.3 255.255.255.0
+no shut
+do wr
+
+exit
+
+ip domain lookup
+ip name-server 10.0.10.1
+ip route 0.0.0.0 0.0.0.0 10.0.10.1
+end

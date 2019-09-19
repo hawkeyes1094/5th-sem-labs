@@ -1,0 +1,17 @@
+#Lab 07 Q1, R1 (DNS server) config
+#Copy paste these commands into the console of R1
+
+conf t
+inter f0/0
+ip address 10.0.10.1 255.255.255.0
+no shut
+do wr
+
+exit
+
+ip domain-name server
+ip host loopback.R1.com 2.2.2.2
+
+inter loopback 1
+ip address 2.2.2.2 255.255.255.255
+end

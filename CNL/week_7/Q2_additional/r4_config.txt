@@ -1,0 +1,20 @@
+#Lab 07 Q2(additional), R4 (DNS client) config
+#Copy paste these commands into the console of R4
+
+conf t
+inter e1/0
+ip address 1.1.1.4 255.255.255.0
+no shutdown
+exit
+
+inter e1/1
+ip address 30.30.30.254 255.255.255.0
+no shutdown
+end
+
+conf t
+ip route 172.16.50.0 255.255.255.0 1.1.1.2
+ip route 10.10.10.0 255.255.255.0 1.1.1.3
+
+ip domain lookup
+ip name-server 1.1.1.1

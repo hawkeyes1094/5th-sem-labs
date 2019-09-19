@@ -1,0 +1,5 @@
+#Lab 07 Q2(additional), PC2 (GREEN) config
+#Copy paste these commands into the console of PC2
+
+ip 172.16.50.2/24 172.16.50.254
+ip dns 1.1.1.1

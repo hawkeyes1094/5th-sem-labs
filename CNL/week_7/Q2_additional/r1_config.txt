@@ -1,0 +1,24 @@
+#Lab 07 Q2(additional), R1 (DNS server) config
+#Copy paste these commands into the console of R1
+
+conf t
+inter e1/0
+ip address 1.1.1.1 255.255.255.0
+no shutdown
+end
+
+conf t
+ip route 172.16.50.0 255.255.255.0 1.1.1.2
+ip route 10.10.10.0 255.255.255.0 1.1.1.3
+ip route 30.30.30.0 255.255.255.0 1.1.1.4
+end
+
+conf t
+ip domain-name server
+
+ip host RED 172.16.50.1
+ip host GREEN 172.16.50.2
+ip host YELLOW 10.10.10.1
+ip host BLUE 10.10.10.2
+ip host BROWN 30.30.30.1
+ip host BLACK 30.30.30.2

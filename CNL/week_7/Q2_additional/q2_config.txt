@@ -73,7 +73,7 @@ conf t
 ip route 172.16.50.0 255.255.255.0 1.1.1.2
 ip route 10.10.10.0 255.255.255.0 1.1.1.3
 ip route 30.30.30.0 255.255.255.0 1.1.1.4
-exit
+end
 
 ##Configure the server for DNS
 conf t

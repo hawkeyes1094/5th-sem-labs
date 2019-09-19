@@ -1,0 +1,5 @@
+#Lab 07 Q2(additional), PC5 (BROWN) config
+#Copy paste these commands into the console of PC5
+
+ip 30.30.30.1/24 30.30.30.254
+ip dns 1.1.1.1
