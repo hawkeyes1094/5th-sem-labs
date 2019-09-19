@@ -3,7 +3,7 @@
 //By - Teja Juluru
 //Created on - 13/9/19
 
-//Find the balance factor of every node in the BST
+//Program to create an AVL tree
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -43,7 +43,6 @@ void BalanceFactor(NODE* root) {
 }
 
 NODE* RightRotate(NODE* root) {
-	printf("Right rotate on node %d\n",root->ele);
 	NODE* x = root->left;
 	NODE* T2 = x->right;
 
@@ -54,7 +53,6 @@ NODE* RightRotate(NODE* root) {
 }
 
 NODE* LeftRotate(NODE* root) {
-	printf("Left rotate on node %d\n",root->ele);
 	NODE* y = root->right;
 	NODE* T2 = y->left;
 
@@ -82,7 +80,7 @@ NODE* InsertBinarySearchTree(NODE* root,int x) {
 	else {
 		// printf("duplicate,x = %d,root->ele = %d\n",x,root->ele);
 		printf("ERROR. Duplicates not allowed\n");
-		exit(0);
+		exit(1);
 	}
 
 	BalanceFactor(root);
