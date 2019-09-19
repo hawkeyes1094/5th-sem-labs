@@ -1,0 +1,4 @@
+#Lab 06 Q2 (additional), PC3 config
+##Copy paste these commands into the console of PC3
+
+ip 30.30.30.1/24 30.30.30.254

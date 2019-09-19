@@ -1,0 +1,16 @@
+#Copy paste these commands into the console of R1
+
+conf t
+inter f0/0
+ip address 10.0.0.1 255.0.0.0
+no shutdown
+exit
+
+inter s1/0
+ip address 20.0.0.1 255.0.0.0
+encapsulation ppp
+no shutdown
+exit
+
+ip route 30.0.0.0 255.0.0.0 20.0.0.2
+

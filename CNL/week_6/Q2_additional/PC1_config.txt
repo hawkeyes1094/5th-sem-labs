@@ -1,0 +1,5 @@
+#Lab 06 Q2 (additional), PC1 config
+##Copy paste these commands into the console of PC1
+
+ip 172.16.50.1/24 172.16.50.254
+

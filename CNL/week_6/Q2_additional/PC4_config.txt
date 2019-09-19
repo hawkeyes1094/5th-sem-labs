@@ -1,0 +1,4 @@
+#Lab 06 Q2 (additional), PC4 config
+##Copy paste these commands into the console of PC4
+
+ip 30.30.30.2/24 30.30.30.254

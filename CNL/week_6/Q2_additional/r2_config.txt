@@ -1,0 +1,17 @@
+#Lab 06 Q2 (additional), R2 config
+##Copy paste these commands into the console of R2
+
+conf t
+inter f0/0
+ip address 30.30.30.254 255.255.255.0
+no shutdown
+exit
+
+inter s1/0
+ip address 10.10.10.2 255.255.255.0
+encapsulation ppp
+no shutdown
+exit
+
+ip route 172.16.50.0 255.255.255.0 10.10.10.1
+
