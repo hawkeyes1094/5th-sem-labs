@@ -5,7 +5,7 @@
 
 //Determine the topological sort of a graph
 // using source removal technique.
-//note - this algo orks only for *directed* acyclic graphs
+//note - this algo works only for *directed* acyclic graphs
 #include<stdio.h>
 #include<stdlib.h>
 #define Q_MAX_SIZE 256
@@ -51,6 +51,8 @@ int Dequeue(QUEUE* q) {
 int main(int argc, char const *argv[])
 {
 	int no_of_vertices;
+	printf("Topological sort using source removal technique\n");
+	printf("This is only for directed acyclic graphs\n");
 	printf("Enter the number of vertices : ");
 	scanf("%d",&no_of_vertices);
 
