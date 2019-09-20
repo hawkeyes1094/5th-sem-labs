@@ -137,6 +137,9 @@ int main(int argc, char const *argv[])
 		if(ele == -1)
 			break;
 		root = InsertBinarySearchTree(root,ele);
+		final_balance(root);
+		inorder(root);
+		printf("\n");
 	}
 	// BalanceFactor(root);
 	// printf("%d\n",root->ele);
