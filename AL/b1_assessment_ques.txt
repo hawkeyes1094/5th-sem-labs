@@ -1,0 +1,5 @@
+using divide and conquer technique, given an array of n elements,
+ having all distinct characters, find the number of inversion counts.
+What is an inversion count? assuming any two elements with 
+indices i and j, if arr[i] happens to be more than arr[j], 
+when i is less than j.
