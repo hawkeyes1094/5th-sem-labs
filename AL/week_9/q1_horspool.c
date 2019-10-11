@@ -13,8 +13,8 @@ void BadChar(char* pattern,int size,int* shift_table) {
 	for(int i = 0;i < TABLESIZE;i++)
 		shift_table[i] = size;
 
-	for(int i = 0,j = size - 1;i < size,j >= 0;i++,j--) {
-		shift_table[(int)pattern[i]] = j;
+	for(int i = 0;i < size - 1;i++) {
+		shift_table[(int)pattern[i]] = size - 1 - i;
 	}
 }
 
@@ -39,25 +39,34 @@ int main(int argc, char const *argv[])
 	int* shift_table = (int*)malloc(TABLESIZE*sizeof(int));
 	
 	BadChar(pattern,strlen(pattern),shift_table);
-	
+	for(int i = 0;i < TABLESIZE;i++) {
+		printf("%d ",shift_table[i]);
+	}
+	printf("\n");
 	//
 	int i = pattern_len - 1;
+	int comparisions = 0;
 
 	while(i < text_len) {
 
 		int k = 0;
-		while(k < pattern_len && pattern[pattern_len-1-k] == text[i-k])
+		while(k < pattern_len && pattern[pattern_len-1-k] == text[i-k]) {
+			comparisions++;
 			k++;
+		}
 		
 		if(k == pattern_len) {
 			printf("Pattern found at index = %d\n",i - pattern_len + 1);
 			break;
 		}
-		i += shift_table[text[i]];
+		else {
+			i += shift_table[text[i]];
+		}
 	
 	}
 	if(i >= text_len)
 		printf("Pattern not found\n");
 
+	printf("No. of comparisions = %d\n",comparisions);
 	return 0;
 }
