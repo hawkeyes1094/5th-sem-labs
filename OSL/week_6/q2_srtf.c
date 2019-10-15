@@ -5,46 +5,64 @@
 
 //Program to simulate Shortest remaining time first(SRTF) scheduling algorithm
 #include<stdio.h>
-#include<stdlib.h>
+
+typedef struct{
+	int pid;
+	int arrival_time;
+	int burst_time;
+	int turnaround_time;
+}process;
 
 int main(int argc, char const *argv[])
 {
+	printf("Enter the no. of processes : ");
 	int n;
-	printf("Enter the number of processes : ");
 	scanf("%d",&n);
-
-	/*
-	+---------+--------------+--------------------------------+
-	| Process | Arrival time | Burst time/Execution time left |
-	+---------+--------------+--------------------------------+ */
-	int** process_table = (int**)malloc(n*sizeof(int*));
-	for(int i = 0;i < n;i++)
-		process_table[i] = (int*)malloc(3*sizeof(int));
-
-	printf("Enter the process info in order of arrival time\n");
+	process p[10];
 	for(int i = 0;i < n;i++) {
-		printf("Enter arrival time & burst time of process P%d\n",i+1);
-		process_table[i][0] = i+1;
-		scanf("%d",&process_table[i][1]);
-		scanf("%d",&process_table[i][2]);
+		printf("Enter arrival and burst time of %d : \n",i);
+		scanf("%d",&(p[i].arrival_time));
+		scanf("%d",&(p[i].burst_time));
+		p[i].pid = i;
 	}
 
-	int* waiting_time = (int*)malloc(n*sizeof(int));
-	for(int i = 0;i < n;i++) { //copy the burst times into the waiting times array
-		waiting_time[i] = process_table[i][2];
+	int processes_completed = 0;
+	int burst_times[10];
+	for(int i = 0;i < n;i++)
+		burst_times[i] = p[i].burst_time;
+
+	int t = 0;
+	printf("\nGnatt chart : \n");
+	printf("|");
+	if(t < p[0].arrival_time) {
+		for(int i = 0;i < p[0].arrival_time;i++)
+			printf(" ");
 	}
 
-	int* process_mark = (int*)malloc(n*sizeof(int)); //flags to mark which processes are completed
-	int processes_completed = 0; //no. of processes completed
-	int time = 0;
-	int current_pid = 0;
+	t += p[0].arrival_time;
+	while(processes_completed < n) {
+		int cur_process;
+		int least_time = 9999;
+		for(int i = 0;i < n;i++) {
+			if(p[i].arrival_time <= t && p[i].burst_time < least_time && p[i].burst_time > 0) {
+				cur_process = p[i].pid;
+				least_time = p[i].burst_time;
+			}
+		}
 
-	//Before all processes arrive
-	time += process_table[0][1]; //To consider the case : if the arrival time of P1 is > 0
-	for(int i = 0;i < n -1;i++) {
-		time += process_table[i+1][1] //add the arrival time of the next process to time
+		printf("%d",cur_process+1);
+		t++;
+		p[cur_process].burst_time -= 1;
+		if(p[cur_process].burst_time == 0) {
+			processes_completed++;
+			p[cur_process].turnaround_time = t - p[cur_process].arrival_time;
+		}
 		
 	}
-
+	printf("|\n");
+	printf("Turnaround times = \n");
+	for(int i = 0;i < n;i++) {
+		printf("PID = %d, Turnaround time = %d\n",p[i].pid+1,p[i].turnaround_time);
+	}
 	return 0;
 }

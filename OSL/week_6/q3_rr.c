@@ -52,7 +52,7 @@ int main(int argc, char const *argv[])
 			pid = (pid + 1) % n;
 			continue;
 		}
-		if(time_quantum < process_table[pid][2]) { //if the time quantum is < burst time of the process
+		if(time_quantum < process_table[pid][2]) { //if the burst time of the process is > time quantum
 			process_table[pid][2] -= time_quantum;
 			time += time_quantum;
 		}
