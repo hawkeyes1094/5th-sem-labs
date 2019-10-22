@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <limits.h>
 
 int max(int a,int b) {
 	return a > b ? a : b;
@@ -10,7 +9,7 @@ int main() {
 	printf("Enter n : \n");
 	scanf("%d", &n);
 	int capacity;
-	printf("Enter capacity : \n");
+	printf("Enter knapsack capacity : \n");
 	scanf("%d", &capacity);
 
 	printf("Eter weights and values : \n");
