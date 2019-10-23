@@ -2,7 +2,7 @@
 #Copy paste these commands into the console of R1
 
 conf t
-inter e1/0
+inter f0/0
 ip address 1.1.1.1 255.255.255.0
 no shutdown
 end
@@ -16,9 +16,11 @@ end
 conf t
 ip domain-name server
 
-ip host RED 172.16.50.1
-ip host GREEN 172.16.50.2
-ip host YELLOW 10.10.10.1
-ip host BLUE 10.10.10.2
-ip host BROWN 30.30.30.1
-ip host BLACK 30.30.30.2
+ip host www.RED.com 172.16.50.1
+ip host www.GREEN.com 172.16.50.2
+ip host www.YELLOW.com 10.10.10.1
+ip host www.BLUE.com 10.10.10.2
+ip host www.BROWN.com 30.30.30.1
+ip host www.BLACK.com 30.30.30.2
+
+ip dns server

@@ -2,12 +2,12 @@
 #Copy paste these commands into the console of R3
 
 conf t
-inter e1/0
+inter f0/0
 ip address 1.1.1.3 255.255.255.0
 no shutdown
 exit
 
-inter e1/1
+inter f0/1
 ip address 10.10.10.254 255.255.255.0
 no shutdown
 end

@@ -14,4 +14,5 @@ ip host loopback.R1.com 2.2.2.2
 
 inter loopback 1
 ip address 2.2.2.2 255.255.255.255
+ip dns server
 end
