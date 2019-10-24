@@ -1,0 +1,24 @@
+#copy paste these commands into the console of R1
+
+conf t
+ip dhcp pool pool1
+network 10.0.0.0 255.255.255.0
+default-router 10.0.0.1
+exit
+
+ip dhcp pool pool2
+network 20.0.0.0 255.255.255.0
+default-router 20.0.0.1
+exit
+
+inter f0/0
+ip address 10.0.0.1 255.255.255.0
+no shut
+do wr
+exit
+
+inter f0/1
+ip address 20.0.0.1 255.255.255.0
+no shut
+do wr
+end

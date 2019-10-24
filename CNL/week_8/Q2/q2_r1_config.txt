@@ -1,0 +1,14 @@
+# copy paste these commands into the console of R1
+
+conf t
+inter f0/0
+ip address 10.0.1.1 255.255.255.0
+no shut
+do wr
+exit
+
+inter f0/1
+ip address 10.0.2.138 255.255.255.0
+no shut
+do wr
+end
