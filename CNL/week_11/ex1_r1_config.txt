@@ -1,0 +1,16 @@
+#copy paste these commands into console of R1
+
+conf t
+inter f0/0
+ip address 1.1.1.1 255.0.0.0
+exit
+
+inter f0/0.2
+encapsulation dot1q 2
+ip address 10.0.1.254 255.255.255.0
+exit
+
+inter f0/0.3
+encapsulation dot1q 3
+ip address 192.168.0.254 255.255.255.0
+end
