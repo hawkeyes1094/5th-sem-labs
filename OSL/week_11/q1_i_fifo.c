@@ -1,3 +1,5 @@
+//Redo this
+
 //OS Lab week 11, Q1, i
 
 //By - Teja Juluru
@@ -5,7 +7,7 @@
 
 //Simulate FIFO page replacement algorithm
 
-//Such a dumbass. The page to be replaced is in a linear order.
+//Such a dumbass. The pages are to be replaced in a linear order.
 //No need for a queue. Change this shit.
 
 #include<stdio.h>
