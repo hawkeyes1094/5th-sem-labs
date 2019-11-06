@@ -117,6 +117,9 @@ int main(int argc, char const *argv[])
 		}
 
 		if(CompareVectors(request,available,m)) {
+
+			//Put all three loops into one.
+
 			//availabe = available - request[request_id]
 			for(int i = 0;i < m;i++)
 				available[i] -= request[i];
@@ -126,6 +129,8 @@ int main(int argc, char const *argv[])
 			//need[request_id] = need[request_id] - request
 			for(int i = 0;i < m;i++)
 				need[request_id][i] -= request[i];
+			//
+			
 			printf("Request granted immediately\n");
 
 			printf("Updated tables are : \n");

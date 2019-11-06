@@ -17,7 +17,7 @@ sem_t mutex,full,empty;
 void* produce(void* param) {
 	int i,val1,val2;
 	printf("Producer created\n");
-	for(i = 0;i < 15;i++) {
+	for(i = 0;i < 100;i++) {
 		sem_wait(&empty);
 		sem_wait(&mutex);
 		printf("produced item is %d\n",i);
@@ -26,9 +26,10 @@ void* produce(void* param) {
 		sem_getvalue(&full,&val1);
 		sem_getvalue(&empty,&val2);
 		printf("P -> item = %d, full = %d, empty = %d\n\n",i,val1,val2);
-		sleep(1);
+		// sleep(1);
 		sem_post(&mutex);
 		sem_post(&full);
+		// sleep(1);
 		// printf("full %ld\n",full);
 	}
 }
@@ -36,7 +37,7 @@ void* produce(void* param) {
 void* consume(void* param) {
 	int item,i,val1,val2;
 	printf("Consumer created\n");
-	for(i = 0;i < 5;i++) {
+	for(i = 0;i < 100;i++) {
 		sem_wait(&full);
 		sem_wait(&mutex);
 		item = buf[f];
@@ -45,9 +46,10 @@ void* consume(void* param) {
 		sem_getvalue(&full,&val1);
 		sem_getvalue(&empty,&val2);
 		printf("C -> item = %d, full = %d, empty = %d\n\n",item,val1,val2);
-		sleep(1);
+		// sleep(1);
 		sem_post(&mutex);
 		sem_post(&empty);
+		// sleep(1);
 		// printf("empty %ld\n",empty);
 	}
 }
@@ -56,7 +58,7 @@ int main(int argc, char const *argv[])
 {
 	pthread_t thread1,thread2;
 	sem_init(&mutex,0,1);
-	sem_init(&full,0,0);
+	sem_init(&full,0,5);
 	sem_init(&empty,0,15);
 
 	pthread_create(&thread1,0,produce,0);

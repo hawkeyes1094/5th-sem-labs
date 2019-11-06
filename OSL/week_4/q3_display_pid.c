@@ -22,14 +22,16 @@ int main(int argc, char const *argv[])
 	}
 	else if(pid == 0) {
 		printf("In child process\n");
-		printf("Parent PID = %ld\n",getppid());
-		printf("Child PID = %ld\n",getpid());
+		printf("PID = %d\n",getpid());
+		printf("Parent PID = %d\n",getppid());
+		printf("child PID = %d\n",pid);
 	}
 	else {
 		wait(NULL);
-		printf("In the parent process\n");
-		printf("Parent PID = %ld\n",getpid());
-		printf("Child PID = %ld\n",pid);
+		printf("\nIn the parent process\n");
+		printf("PID = %d\n",getpid());
+		printf("Parent PID = %d\n",getppid());
+		printf("Child PID = %d\n",pid);
 	}
 	return 0;
 }

@@ -21,7 +21,7 @@ int main(int argc, char const *argv[])
 		exit(-1);
 	}
 	else if(pid == 0) {
-		execlp("./q1_block_parent","q1_block_parent",NULL);
+		execlp("./q1_block_parent.o","q1_block_parent",NULL);
 	}
 	else {
 		wait(NULL);
